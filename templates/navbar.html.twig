@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+
+
+        <nav class="navbar  bg-success-subtle  navbar-expand-lg  text-dark>
+         <div class="container-fluid">
+          <a class="navbar-brand  " href="#">Menu</a>
+           <div class="composer config extra.symfony.allow-contrib true navbar-collapse" id="navbarNav">
+             <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link {{ app.current_route=='home'? 'active':''}}" href="{{url('home')}}">Acceuil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{ app.current_route=='services'? 'active':''}} " href="{{url('services')}}">services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{ app.current_route=='habitats'? 'active':''}} " href="{{url('habitats')}}">habitat</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{ app.current_route=='contact'? 'active':''}} " href="{{url('contact')}}">contacts</a>
+              </li>
+             </ul>
+             <button type="button" class="btn btn-primary position-absolute end-0"><a class= "text-white" href="{{url('login')}}">connexion</a><button>
+          </div>
+         </div>
+        </nav>
+        </div>
+<style>
+    
+</style>
+
+
+{% endblock %}

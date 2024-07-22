@@ -1,0 +1,57 @@
+:root {
+    --main: #D92332;
+    --sub: #D94350;
+    --aux: #D9777F;
+    --black: #262526;
+    --light: #F2F2F2;
+    --white: #FFFFFF;
+}
+
+a {
+    color: var(--aux);
+}
+
+body {
+    background-color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 500;
+}
+
+.btn-main {
+    border-color: var(--black);
+    border-style: dashed;
+    background-color: transparent;
+    color: var(--black);
+    font-weight: bold;
+}
+
+.btn-main:hover {
+    background-color: var(--black);
+    border-color: var(--black);
+    color: var(--light);
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn,
+.card {
+    border-radius: var(--bs-border-radius-xl) !important;
+    margin-top: 20px  !important;
+    margin-bottom: 20px ;
+}
+
+.text-main {
+    color: var(--main);
+}
+
+.text-sub {
+    color: var(--sub);
+}
+
+.text-aux {
+    color: var(--aux);
+}
+
+.material-icons {
+    vertical-align: middle;
+}

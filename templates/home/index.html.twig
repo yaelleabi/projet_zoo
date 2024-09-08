@@ -14,27 +14,27 @@
 
 
 </style>
-<h1> Le zoo Arcadia</h1>
+<h1 class="justify-content-center" style="color: lightblue"> Le zoo Arcadia</h1>
 <h2> Le paradis des animaux </h2>
-<div class = "container-fluid">
-  <div class ="row">
+<div class = "container">
+  <div class ="row ">
     <div class ="col md-3 ">
-      <div class="card" style="width: 18rem;">
+      <div class="card " style="width:18rem;">
         <img src="{{asset('images/train.jpeg')}}" class="card-img-top" alt="petit train">
           <div class="card-body">
             <h5 class="card-title">Nos services</h5>
              <p class="card-text">Bonjour à tous!<br>
               Dans notre zoo vous trouverez les services suivants:<br>
-              <ul>
-                <li>Restauration</li>
-                <li>Visite des habitats avec guide <strong >gratuit!</strong></li>
-                <li> Visite du zoo avec notre magnifique petit train! </li>
-               </ul>
-             </p>
-             <a href="{{url('services')}}" class="btn btn-success">En savoir plus!</a>
-          </div>
-      </div>
-    </div>
+             {% for service in services %}
+                    <h5 class=" text-sub" style="font-size: 0,8rem;">{{ service.nom}}</h5>
+              {% endfor %}
+              <a href="{{url('app_services_index')}}" class="btn btn-success">En savoir plus!</a>
+
+                   
+                </div>
+            </div>
+        </div>
+      
     <div class ="col md-6 ">
       <div class="card" style="width: 18rem;">
         <img src="{{asset('images/zebre.jpg')}}" class="card-img-top" alt="petit train">
@@ -45,7 +45,7 @@
              <ul>
               <li> Nos félins :Lions , tigres ,puma</li>
               <li>Nos oiseaux exotiques</strong></li>
-              <li><strong>Et tellement d'autres !!</<strong></li>
+              <li><strong>Et tellement d'autres </<strong></li>
              </ul>
             </p>
             <a href="https://g.co/kgs/UwVkz7c" class="btn btn-success">Comment venir?</a>

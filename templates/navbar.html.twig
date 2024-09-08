@@ -14,7 +14,7 @@
                 <a class="nav-link {{ app.current_route=='home'? 'active':''}}" href="{{url('home')}}">Acceuil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{ app.current_route=='services'? 'active':''}} " href="{{url('services')}}">services</a>
+                <a class="nav-link {{ app.current_route=='services'? 'active':''}} " href="{{url('app_services_index')}}">services</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link {{ app.current_route=='habitats'? 'active':''}} " href="{{url('habitats')}}">habitat</a>
@@ -23,7 +23,7 @@
                 <a class="nav-link {{ app.current_route=='contact'? 'active':''}} " href="{{url('contact')}}">contacts</a>
               </li>
              </ul>
-             <button type="button" class="btn btn-primary position-absolute end-0"><a class= "text-white" href="{{url('login')}}">connexion</a><button>
+             <button type="button" class="btn btn-primary position-absolute end-0"><a class= "text-white" href="{{url('app_login')}}">connexion</a><button>
           </div>
          </div>
         </nav>

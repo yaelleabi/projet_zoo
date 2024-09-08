@@ -3,3 +3,18 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+app_admin:
+    path: /admin
+    controller: App\Controller\AdminController::index
+
+app_veterinary:
+    path: /veterinary
+    controller: App\Controller\VeterinaryController::index
+
+app_employee:
+    path: /employee
+    controller: App\Controller\EmployeeController::index
+
+homepage:
+    path: /
+    controller: App\Controller\HomeController::index

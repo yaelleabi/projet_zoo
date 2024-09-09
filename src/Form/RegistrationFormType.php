@@ -12,11 +12,7 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-
-// Ajoute ce champ dans ton formulaire d'inscription
-
-   
-
+use Symfony\Component\Form\CallbackTransformer;
 
 class RegistrationFormType extends AbstractType
 {
@@ -24,17 +20,16 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
+            
+            // ->add('agreeTerms', CheckboxType::class, [
+            //     'mapped' => false,
+            //     'constraints' => [
+            //         new IsTrue([
+            //             'message' => 'You should agree to our terms.',
+            //         ]),
+            //     ],
+            // ])
             ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
@@ -44,22 +39,31 @@ class RegistrationFormType extends AbstractType
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
                 ],
             ])
             ->add('roles', ChoiceType::class, [
                 'choices' => [
-                    
-                    'employe'=>'ROLE_EMPLOYEE',
-                    'veterinary'=>'ROLE_VETERINARY',
-
+                    'Employee' => 'ROLE_EMPLOYEE',
+                    'Veterinary' => 'ROLE_VETERINARY',
                 ],
-                
-                'expanded' => true, // Afficher des cases à cocher
+                'expanded' => true, // Afficher sous forme de cases à cocher
+                'multiple' => false, // Une seule option sélectionnable
             ]);
-        ;
+
+        // Transformer les données entre la vue et le modèle
+        $builder->get('roles')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($rolesArray) {
+                    // Transforme un tableau en chaîne pour l'affichage dans le formulaire
+                    return is_array($rolesArray) && count($rolesArray) > 0 ? $rolesArray[0] : null;
+                },
+                function ($rolesString) {
+                    // Transforme une chaîne en tableau pour la sauvegarde dans l'entité
+                    return [$rolesString];
+                }
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver): void

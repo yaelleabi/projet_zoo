@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Avis des utilisateurs</h1>
+
+    {% if approvedReviews is not empty %}
+        <ul>
+            {% for review in approvedReviews %}
+                <li>{{ review.content }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun avis pour le moment.</p>
+    {% endif %}
+{% endblock %}

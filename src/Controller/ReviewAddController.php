@@ -2,17 +2,27 @@
 
 namespace App\Controller;
 
+use App\Entity\Review;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
+
 
 class ReviewAddController extends AbstractController
-{
-    #[Route('/review/add', name: 'app_review_add')]
-    public function index(): Response
+{   
+    #[Route('/reviews', name: 'app_reviews')]
+    public function index(EntityManagerInterface $entityManager): Response
     {
-        return $this->render('review_add/index.html.twig', [
-            'controller_name' => 'ReviewAddController',
+      
+        $approvedReviews = $entityManager->getRepository(Review::class)->findBy(['status' => 'approved']);
+
+        return $this->render('review/index.html.twig', [
+            'approvedReviews' => $approvedReviews,
         ]);
     }
+
+  
+ 
 }
+

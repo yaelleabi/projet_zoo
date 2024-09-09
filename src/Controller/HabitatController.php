@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/habitat')]
 class HabitatController extends AbstractController
 {
-    #[Route('/', name: 'app_habitat_index', methods: ['GET'])]
+    #[Route('/habitat', name: 'app_habitat_index', methods: ['GET'])]
     public function index(HabitatRepository $habitatRepository): Response
     {
         return $this->render('habitat/index.html.twig', [

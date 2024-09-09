@@ -31,11 +31,11 @@ class RegistrationController extends AbstractController
                 )
             );
             $user->setRoles($form->get('roles')->getData());
+            //$user->setRoles([$form->get('roles')->getData()]); // Enveloppe le rôle dans un tableau
+
 
             $entityManager->persist($user);
             $entityManager->flush();
-
-            // do anything else you need here, like send an email
 
             return $security->login($user, LoginAuthenticator::class, 'main');
         }

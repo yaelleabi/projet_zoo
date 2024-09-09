@@ -3,7 +3,7 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <h1 class="justify-content-center" style="color: lightblue"> Création de compte employé/vetérinaire</h1>
 
     {{ form_errors(registrationForm) }}
 
@@ -12,7 +12,9 @@
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+         {{ form_row(registrationForm.roles) }}
+
+       
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}

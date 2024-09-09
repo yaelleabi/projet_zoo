@@ -1,0 +1,11 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Déposer un avis</h1>
+
+    {{ form_start(reviewForm) }}
+        {{ form_widget(reviewForm) }}
+        <button class="btn btn-primary">Soumettre</button>
+    {{ form_end(reviewForm) }}
+{% endblock %}

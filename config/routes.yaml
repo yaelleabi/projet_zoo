@@ -12,7 +12,7 @@ app_veterinary:
     controller: App\Controller\VeterinaryController::index
 
 app_employee:
-    path: /employee
+    path: /employe
     controller: App\Controller\EmployeeController::index
 
 homepage:

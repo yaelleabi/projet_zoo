@@ -18,4 +18,12 @@
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
+    {# Affiche tous les messages flash de type 'success' #}
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
+
 {% endblock %}

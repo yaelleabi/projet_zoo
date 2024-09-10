@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/services')]
+#[Route(path: '/services')]
 class ServicesController extends AbstractController
 {
     #[Route('/', name: 'app_services_index', methods: ['GET'])]

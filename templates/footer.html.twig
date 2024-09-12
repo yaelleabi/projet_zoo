@@ -1,19 +1,10 @@
-{#{% extends 'base.html.twig' %}
-{% block body %}
-<div class=" w-100 position-absolute bottom-0  h- 10 bg-success-subtle">
-<div class="col-md-4"">
-<p>Horaires d'ouvertures<br>
-Lundi au vendredi :10H -19H <br>
-Samedi et dimanche :10H -20H 
-</p>
-</div>
-</div>
-{%endblock%}#}
- {% block body %}                      
-  <footer class="bg-success-subtle text-sucess mt-5 py-4 footer position-absolute bottom-0  w-100">
+{# {% extends 'base.html.twig' %} #}
+ {# {% block body %}                       #}
+ <div class="container-fluid mt-5">
+ <footer class="bg-success-subtle text-sucess mt-5 py-4 footer position-absolute bottom-0  w-100">
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <img src="{{asset('images/logo.png')}}" alt="Logo" width="100" height="70">
                 <h5 class="mt-2">Zoo Arcadia</h5>
             </div>
@@ -40,13 +31,15 @@ Samedi et dimanche :10H -20H
                     </li>
                 </ul>
             </div>
-            <div class="col-md-3">
-                <h5>Horaires d'ouvertures</h5>
-                Lundi au vendredi :10H -19H <br>
-                Samedi et dimanche :10H -20H 
-               
-            </div>
+            <div class="col-md-4">
+            <h5>Horaires d'ouvertures</h5>
+                {% for openingHour in openingHours %}
+                    <p>{{ openingHour.day }} : {{ openingHour.openHour|date('H:i') }} - {{ openingHour.closeHour|date('H:i') }}</p>
+                    {% endfor %}
+             </div>
         </div>
     </div>
 </footer>
-{%endblock%}
+ </div>
+  
+{# {%endblock%} #}

@@ -23,7 +23,7 @@ class EmployeController extends AbstractController
         // Récupérer les avis en attente
         $pendingReviews = $entityManager->getRepository(Review::class)->findBy(['status' => 'pending']);
 
-        return $this->render('employe/reviews.html.twig', [
+        return $this->render('employe/index.html.twig', [
             'pendingReviews' => $pendingReviews,
         ]);
     }

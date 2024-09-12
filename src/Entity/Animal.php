@@ -19,6 +19,12 @@ class Animal
     #[ORM\Column(length: 255)]
     private ?string $race = null;
 
+    
+
+    #[ORM\ManyToOne(inversedBy: 'animals')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Habitat $Habitat_Id = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +57,19 @@ class Animal
     public function setRace(string $race): static
     {
         $this->race = $race;
+
+        return $this;
+    }
+
+    
+    public function getHabitatId(): ?Habitat
+    {
+        return $this->Habitat_Id;
+    }
+
+    public function setHabitatId(?Habitat $Habitat_Id): static
+    {
+        $this->Habitat_Id = $Habitat_Id;
 
         return $this;
     }

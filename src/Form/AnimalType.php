@@ -14,6 +14,7 @@ class AnimalType extends AbstractType
         $builder
             ->add('name')
             ->add('race')
+            ->add('habitat_id')
         ;
     }
 

@@ -31,7 +31,7 @@ class ReviewValidateController extends AbstractController
             $this->addFlash('success', 'Votre avis a été soumis et est en attente de validation.');
 
             // Rediriger ou afficher la confirmation
-            return $this->redirectToRoute('/');
+            return $this->redirectToRoute('home');
         }
 
         // Afficher le formulaire d'avis

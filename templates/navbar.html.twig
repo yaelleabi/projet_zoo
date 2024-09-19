@@ -1,8 +1,8 @@
-{# {% extends 'base.html.twig' %} #}
+{% extends 'base.html.twig' %} 
 
 
 
-{# {% block body %} #}
+ {% block body %} 
 
 
         <nav class="navbar  bg-success-subtle  navbar-expand-lg  text-dark">
@@ -23,7 +23,7 @@
                 <a class="nav-link {{ app.current_route=='contact'? 'active':''}} " href="{{url('contact')}}">contacts</a>
               </li>
              </ul>
-             <button type="button" class="btn btn-primary position-absolute end-0"><a class= "text-white" href="{{url('app_login')}}">connexion</a><button>
+             <button type="button" class="btn btn-primary position-absolute end-0"><a class= "text-white" href="{{url('app_login')}}">connexion</a></button>
           </div>
          </div>
         </nav>
@@ -33,4 +33,4 @@
 </style>
 
 
-{# {% endblock %} #}
+ {% endblock %} 

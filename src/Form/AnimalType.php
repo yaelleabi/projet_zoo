@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Animal;
+use App\Entity\Habitat;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,9 +16,8 @@ class AnimalType extends AbstractType
         $builder
             ->add('name')
             ->add('race')
-            ->add('habitat_id')
-        ;
-    }
+            ->add('habitatid')
+        ; }
 
     public function configureOptions(OptionsResolver $resolver): void
     {

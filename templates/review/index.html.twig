@@ -5,8 +5,12 @@
 
     {% if approvedReviews is not empty %}
         <ul>
+
             {% for review in approvedReviews %}
-                <li>{{ review.content }}</li>
+            <li>
+                <strong>{{ review.name }}</strong> 
+                    : {{ review.content }}
+            </li> 
             {% endfor %}
         </ul>
     {% else %}

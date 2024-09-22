@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AnimalRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
@@ -24,6 +26,17 @@ class Animal
     #[ORM\ManyToOne(inversedBy: 'animals')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Habitat $Habitat_Id = null;
+
+    /**
+     * @var Collection<int, AnimalFeeding>
+     */
+    #[ORM\OneToMany(targetEntity: AnimalFeeding::class, mappedBy: 'animal')]
+    private Collection $animalFeedings;
+
+    public function __construct()
+    {
+        $this->animalFeedings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -70,6 +83,36 @@ class Animal
     public function setHabitatId(?Habitat $Habitat_Id): static
     {
         $this->Habitat_Id = $Habitat_Id;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AnimalFeeding>
+     */
+    public function getAnimalFeedings(): Collection
+    {
+        return $this->animalFeedings;
+    }
+
+    public function addAnimalFeeding(AnimalFeeding $animalFeeding): static
+    {
+        if (!$this->animalFeedings->contains($animalFeeding)) {
+            $this->animalFeedings->add($animalFeeding);
+            $animalFeeding->setAnimal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnimalFeeding(AnimalFeeding $animalFeeding): static
+    {
+        if ($this->animalFeedings->removeElement($animalFeeding)) {
+            // set the owning side to null (unless already changed)
+            if ($animalFeeding->getAnimal() === $this) {
+                $animalFeeding->setAnimal(null);
+            }
+        }
 
         return $this;
     }

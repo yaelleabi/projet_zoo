@@ -33,9 +33,16 @@ class Animal
     #[ORM\OneToMany(targetEntity: AnimalFeeding::class, mappedBy: 'animal')]
     private Collection $animalFeedings;
 
+    /**
+     * @var Collection<int, RapportVeterinaire>
+     */
+    #[ORM\OneToMany(targetEntity: RapportVeterinaire::class, mappedBy: 'Animal')]
+    private Collection $rapportVeterinaires;
+
     public function __construct()
     {
         $this->animalFeedings = new ArrayCollection();
+        $this->rapportVeterinaires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -111,6 +118,36 @@ class Animal
             // set the owning side to null (unless already changed)
             if ($animalFeeding->getAnimal() === $this) {
                 $animalFeeding->setAnimal(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RapportVeterinaire>
+     */
+    public function getRapportVeterinaires(): Collection
+    {
+        return $this->rapportVeterinaires;
+    }
+
+    public function addRapportVeterinaire(RapportVeterinaire $rapportVeterinaire): static
+    {
+        if (!$this->rapportVeterinaires->contains($rapportVeterinaire)) {
+            $this->rapportVeterinaires->add($rapportVeterinaire);
+            $rapportVeterinaire->setAnimal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRapportVeterinaire(RapportVeterinaire $rapportVeterinaire): static
+    {
+        if ($this->rapportVeterinaires->removeElement($rapportVeterinaire)) {
+            // set the owning side to null (unless already changed)
+            if ($rapportVeterinaire->getAnimal() === $this) {
+                $rapportVeterinaire->setAnimal(null);
             }
         }
 

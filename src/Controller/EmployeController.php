@@ -12,13 +12,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class EmployeController extends AbstractController
 {
     #[Route('/employe', name: 'app_employe')]
-    public function index(): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
-        return $this->render('employe/index.html.twig', [
-            'controller_name' => 'EmployeController',
+        // return $this->render('employe/index.html.twig', [
+        //     'controller_name' => 'EmployeController',
             
+        // ]);
+        $pendingReviews = $entityManager->getRepository(Review::class)->findBy(['status' => 'pending']);
+
+        return $this->render('employe/index.html.twig', [
+            'pendingReviews' => $pendingReviews,
         ]);
     }
+    
     #[Route('/employe/reviews', name: 'employe_reviews')]
     public function new(EntityManagerInterface $entityManager): Response
     {

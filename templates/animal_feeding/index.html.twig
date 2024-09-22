@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AnimalFeeding index{% endblock %}
+
+{% block body %}
+    <h1>AnimalFeeding index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>FoodType</th>
+                <th>Quantity</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for animal_feeding in animal_feedings %}
+            <tr>
+                <td>{{ animal_feeding.id }}</td>
+                <td>{{ animal_feeding.Date ? animal_feeding.Date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ animal_feeding.foodType }}</td>
+                <td>{{ animal_feeding.quantity }}</td>
+                <td>
+                    <a href="{{ path('app_animal_feeding_show', {'id': animal_feeding.id}) }}">show</a>
+                    <a href="{{ path('app_animal_feeding_edit', {'id': animal_feeding.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_animal_feeding_new') }}">Create new</a>
+{% endblock %}

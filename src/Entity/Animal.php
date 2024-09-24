@@ -23,9 +23,9 @@ class Animal
 
     
 
-    #[ORM\ManyToOne(inversedBy: 'animals')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Habitat $Habitat_Id = null;
+    #[ORM\ManyToOne(inversedBy: 'animal')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Habitat $Habitat = null;
 
     /**
      * @var Collection<int, AnimalFeeding>
@@ -82,14 +82,14 @@ class Animal
     }
 
     
-    public function getHabitatId(): ?Habitat
+    public function getHabitat(): ?Habitat
     {
-        return $this->Habitat_Id;
+        return $this->Habitat;
     }
 
-    public function setHabitatId(?Habitat $Habitat_Id): static
+    public function setHabitat(?Habitat $Habitat): static
     {
-        $this->Habitat_Id = $Habitat_Id;
+        $this->Habitat = $Habitat;
 
         return $this;
     }

@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
+use App\Validator\uniqueOpenHour;
 
 class OpeningHours1Type extends AbstractType
 {
@@ -24,7 +25,10 @@ class OpeningHours1Type extends AbstractType
                     'Samedi' => 'Samedi',
                     'Dimanche' => 'Dimanche',
                 ],
-                'label' => 'Jour de la semaine'
+               'label' => 'Jour de la semaine',
+               'constraints' => [ 
+                new uniqueOpenHour(),
+            ]
             ])
             ->add('openHour',  TimeType::class, [
                 'widget' => 'single_text',

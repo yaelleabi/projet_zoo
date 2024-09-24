@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RapportVeterinaire index{% endblock %}
+
+{% block body %}
+    <h1>RapportVeterinaire index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>état</th>
+                <th>Date</th>
+                <th>Detail</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rapport_veterinaire in rapport_veterinaires %}
+            <tr>
+                <td>{{ rapport_veterinaire.id }}</td>
+                <td>{{ rapport_veterinaire.état }}</td>
+                <td>{{ rapport_veterinaire.date ? rapport_veterinaire.date|date('Y-m-d') : '' }}</td>
+                <td>{{ rapport_veterinaire.detail }}</td>
+                <td>
+                    <a href="{{ path('app_rapport_veterinaire_show', {'id': rapport_veterinaire.id}) }}">show</a>
+                    <a href="{{ path('app_rapport_veterinaire_edit', {'id': rapport_veterinaire.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_rapport_veterinaire_new') }}">Create new</a>
+{% endblock %}

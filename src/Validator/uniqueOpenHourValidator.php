@@ -25,7 +25,7 @@ class uniqueOpenHourValidator extends ConstraintValidator
 
         // Logique de validation : recherche dans la base de données
         $existingOpeninghour = $this->em->getRepository(OpeningHours::class)->findOneBy([
-            'day' => $value->getday(),
+            'day' => $value,
         
         ]);
 

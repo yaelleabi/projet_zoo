@@ -3,18 +3,18 @@
 {% block title %}Hello VeterinaryController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+  <div class="container mt-4">
+        <h1 class="mb-4">Bonjour, bienvenue dans votre espace Vétérinaire</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/yayaa/projet_zoo/src/Controller/VeterinaryController.php</code></li>
-        <li>Your template at <code>C:/Users/yayaa/projet_zoo/templates/veterinary/index.html.twig</code></li>
-    </ul>
-</div>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Voici la liste de la nourrityre donnée par les employés</h3>
+                 
+            </div>
+            <div class="col-md-8">
+               <h3>Entrer un nouveau rapport Vétérinaire</h3>
+                <a class="btn btn-primary text-white" href="{{url('app_rapport_veterinaire_new') }}">Ajouter un nouveau rapport</a>
+    
+            </div>
+        </div>
 {% endblock %}

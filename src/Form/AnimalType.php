@@ -16,7 +16,14 @@ class AnimalType extends AbstractType
         $builder
             ->add('name')
             ->add('race')
-            ->add('habitatid')
+             ->add('Habitat', EntityType::class, [
+                'class' => Habitat::class,
+                'choice_label' => function (Habitat $habitat) {
+                    return $habitat->getNom() ; 
+                },
+                'label' => 'Choisir un habitat',
+              
+            ])
         ; }
 
     public function configureOptions(OptionsResolver $resolver): void

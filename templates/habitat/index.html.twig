@@ -11,7 +11,7 @@
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Description</th>
-                <th>actions</th>
+                <th>animaux</th>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +20,11 @@
                 <td>{{ habitat.id }}</td>
                 <td>{{ habitat.nom }}</td>
                 <td>{{ habitat.description }}</td>
+                <td>{% for animal in habitat.animals %}
+                      {{ animal.name }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+
                 <td>
                     <a href="{{ path('app_habitat_show', {'id': habitat.id}) }}">show</a>
                     <a href="{{ path('app_habitat_edit', {'id': habitat.id}) }}">edit</a>

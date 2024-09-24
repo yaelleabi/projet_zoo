@@ -15,7 +15,7 @@ class RapportVeterinaire
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $état = null;
+    private ?string $state = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
@@ -32,14 +32,14 @@ class RapportVeterinaire
         return $this->id;
     }
 
-    public function getétat(): ?string
+    public function getState(): ?string
     {
-        return $this->état;
+        return $this->state;
     }
 
-    public function setétat(string $état): static
+    public function set(string $state): static
     {
-        $this->état = $état;
+        $this->state = $state;
 
         return $this;
     }

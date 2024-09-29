@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/animal/feeding')]
 class AnimalFeedingController extends AbstractController
 {
-    #[Route('/', name: 'app_animal_feeding_index', methods: ['GET'])]
+    #[Route('/a', name: 'app_animal_feeding_index', methods: ['GET'])]
     public function index(AnimalFeedingRepository $animalFeedingRepository): Response
     {
         return $this->render('animal_feeding/index.html.twig', [

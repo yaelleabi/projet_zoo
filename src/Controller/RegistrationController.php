@@ -40,9 +40,9 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
              $email = (new Email())
             ->from('josearcadia1012@gmail.com') // Admin email
-             ->to($user->getUsername()) // Employee email (make sure User entity has a getEmail() method)
-             ->subject('Welcome to Our Company!')
-             ->text('Dear employee, your registration has been completed by the admin. Welcome aboard!')
+            ->to($user->getUsername()) // Employee email (make sure User entity has a getEmail() method)
+            ->subject('Welcome to Our Company!')
+            ->text('Dear employee, your registration has been completed by the admin. Welcome aboard!')
             ->html('<p>Dear employee,</p><p>Your registration has been completed by the admin. Welcome aboard!</p>');
 
               $mailer->send($email);

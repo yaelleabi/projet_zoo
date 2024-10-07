@@ -1,17 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Espace employé{% endblock %}
+{% block title %}Espace Employé{% endblock %}
 
 {% block body %}
-    <div class="container mt-4">
-        <h1 class="mb-4">Bonjour, bienvenue dans votre espace employé</h1>
+<style>
+   
+</style>
 
-        <div class="row">
-            <div class="col-md-4">
-                <h3>Voici la liste des avis en attente de validation</h3>
+<div class="container employee-container">
+    <div class="row employee-header">
+        <div class="col-md-12">
+            <h1 class="display-4">Bonjour, bienvenue dans votre espace employé</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card employee-card">
+                <h3>Liste des avis en attente de validation</h3>
 
                 {% if pendingReviews is not empty %}
-                    <table class="table table-striped table-bordered mt-4">
+                    <table class="table table-striped table-bordered employee-table">
                         <thead class="table-dark">
                             <tr>
                                 <th scope="col">Nom de l'auteur</th>
@@ -22,7 +31,7 @@
                         <tbody>
                             {% for review in pendingReviews %}
                                 <tr>
-                                    <td>{{ review.name }}</td> >
+                                    <td>{{ review.name }}</td>
                                     <td>{{ review.content }}</td>
                                     <td>
                                         <a href="{{ path('employe_review_approve', {id: review.id}) }}" class="btn btn-success btn-sm">Approuver</a>
@@ -33,16 +42,20 @@
                         </tbody>
                     </table>
                 {% else %}
-                    <div class="alert alert-info mt-4">Aucun avis en attente pour le moment.</div>
+                    <div class="alert alert-info">Aucun avis en attente pour le moment.</div>
                 {% endif %}
             </div>
-            <div class="col-md-8">
-               <h3> Que souhaitez vous effectuer aujourd'hui?</h3>
-               <a class="btn btn-primary text-white" href="{{url('app_services_index') }}">Modifier les services</a>
-               <a class="btn btn-primary text-white" href="{{url('app_animal_feeding_new') }}">Ajouter de la nourriture à un animal</a>
-              
-               {# <a class="btn btn-primary text-white" href="{{url('app_animal_feeding_index') }}">ajouter de la nourriture à un animal</a> #}
+        </div>
+
+        <div class="col-md-8">
+            <div class="card employee-card">
+                <h3>Que souhaitez-vous effectuer aujourd'hui ?</h3>
+                <a class="btn btn-primary employee-btn text-white" href="{{ url('app_services_index') }}">Modifier les services</a>
+                <a class="btn btn-primary employee-btn text-white" href="{{ url('app_animal_feeding_new') }}">Ajouter de la nourriture à un animal</a>
+                <a class="btn btn-danger admin-btn text-white" href="{{ url('app_logout') }}">Déconnexion</a>
             </div>
         </div>
-        
+    </div>
+</div>
+
 {% endblock %}

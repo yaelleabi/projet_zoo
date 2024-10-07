@@ -6,7 +6,8 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\LoginAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Exception;
+ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,6 +39,7 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
+        
              $email = (new Email())
             ->from('josearcadia1012@gmail.com') // Admin email
             ->to($user->getUsername()) // Employee email (make sure User entity has a getEmail() method)
@@ -45,7 +47,9 @@ class RegistrationController extends AbstractController
             ->text('Dear employee, your registration has been completed by the admin. Welcome aboard!')
             ->html('<p>Dear employee,</p><p>Your registration has been completed by the admin. Welcome aboard!</p>');
 
-              $mailer->send($email);
+             $mailer->send($email);
+            
+            
 
            // return $security->login($user, LoginAuthenticator::class, 'main');
            // Dans ton contrôleur

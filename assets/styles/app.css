@@ -55,3 +55,51 @@ body {
 .material-icons {
     vertical-align: middle;
 }
+
+
+.admin-container ,.employee-container{
+    margin-top: 50px;
+}
+
+.admin-card ,.employee-card  {
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-header,.employee-header  {
+    margin-bottom: 40px;
+    text-align: center;
+    color: rgba(144, 238, 144, 0.66);
+   
+}
+
+.admin-btn {
+    width: 100%;
+    margin-top: 20px;
+
+}
+.card-title{
+    color:rgb(64, 163, 64);
+}
+h1,h2{
+    color: lightgreen; text-shadow: lightgreen 1px 0 10px;
+}
+
+
+
+
+
+
+.employee-table {
+    margin-top: 30px;
+}
+
+.employee-btn {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.alert {
+    margin-top: 30px;
+}

@@ -21,6 +21,13 @@ class HabitatController extends AbstractController
             'habitats' => $habitatRepository->findAll(),
         ]);
     }
+    #[Route('/customer', name: 'app_habitat_customer', methods: ['GET'])]
+    public function custom(HabitatRepository $habitatRepository): Response
+    {
+        return $this->render('habitat/customer.html.twig', [
+            'habitats' => $habitatRepository->findAll(),
+        ]);
+    }
 
     #[Route('/new', name: 'app_habitat_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response

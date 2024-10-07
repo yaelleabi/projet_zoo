@@ -8,7 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\ServicesRepository;
 use App\Repository\HabitatRepository;
-
+use App\Repository\AnimalRepository;
+use App\Repository\ReviewRepository;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home')]
@@ -16,11 +17,14 @@ class HomeController extends AbstractController
         ServicesRepository $serviceRepository,
         HabitatRepository $habitatRepository,
         OpeningHoursRepository $openingHoursRepository,
-       
+        AnimalRepository $animalRepository,   
+        ReviewRepository $reviewRepository,    
     ): Response {
         $services = $serviceRepository->findAll();
         $habitats= $habitatRepository->findAll();
         $openingHours= $openingHoursRepository->findAll();
+        $animals=$animalRepository->findAll();
+        $reviews=$reviewRepository->findAll();
 
         
 
@@ -28,6 +32,8 @@ class HomeController extends AbstractController
             'services' => $services,
             'habitats' => $habitats,
             'openingHours'=>$openingHours,
+            'animals'=>$animals,
+            'reviews'=>$reviews
             
         ]);
     }

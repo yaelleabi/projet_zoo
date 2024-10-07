@@ -1,37 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Espace Administrateur{% endblock %}
 
 {% block body %}
 <style>
-    .
+
 </style>
 
-<h1>Bonjour, José</h1>
-<h2>Bienvenue dans votre espace administrateur</h2>
-<h3>Que souhaitez-vous effectuer?</h3>
-<div class="row">
-    <div class="col-md-3">
-        <a class="btn btn-primary text-white" href="{{url('app_services_index') }}">Modifier les services</a>
+<div class="container admin-container">
+    <div class="row admin-header">
+        <div class="col-md-12">
+            <h1 class="display-4">Bonjour, José</h1>
+            <h2>Bienvenue dans votre espace administrateur</h2>
+            <h3>Que souhaitez-vous effectuer?</h3>
+        </div>
     </div>
-    <div class="col-md-3">
-        <a class="btn btn-primary text-white" href="{{url('app_register') }}">Création de compte</a>
-    </div>
-    <div class="col-md-3">
-        <a class="btn btn-primary text-white" href="{{url('app_habitat_index') }}">Modifier les habitats</a>
-    </div>
-</div>
-<div class="row">
-  <div class="col-md-3">
-        <a class="btn btn-primary text-white" href="{{url('app_animal_index') }}">Modifier les animaux</a>
-    </div>
-     <div class="col-md-3">
-        <a class="btn btn-primary text-white" href="{{url('app_opening_hours_index') }}">Modifier les horaires</a>
-    </div>
-    <div class="col-md-3">
-     <a class="btn btn-primary text-white" href="{{url('app_logout') }}">Déconnexion</a>
-     </div>
 
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card admin-card">
+                <a class="btn btn-primary admin-btn text-white" href="{{ url('app_services_index') }}">
+                    Modifier les services
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card admin-card">
+                <a class="btn btn-primary admin-btn text-white" href="{{ url('app_register') }}">
+                    Création de compte
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card admin-card">
+                <a class="btn btn-primary admin-btn text-white" href="{{ url('app_habitat_index') }}">
+                    Modifier les habitats
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card admin-card">
+                <a class="btn btn-primary admin-btn text-white" href="{{ url('app_animal_index') }}">
+                    Modifier les animaux
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card admin-card">
+                <a class="btn btn-primary admin-btn text-white" href="{{ url('app_opening_hours_index') }}">
+                    Modifier les horaires
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card admin-card">
+                <a class="btn btn-danger admin-btn text-white" href="{{ url('app_logout') }}">
+                    Déconnexion
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

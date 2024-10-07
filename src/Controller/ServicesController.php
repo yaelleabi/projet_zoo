@@ -21,6 +21,13 @@ class ServicesController extends AbstractController
             'services' => $servicesRepository->findAll(),
         ]);
     }
+    #[Route('/customer', name: 'app_services_customer', methods: ['GET'])]
+    public function custom(ServicesRepository $servicesRepository): Response
+    {
+        return $this->render('services/customer.html.twig', [
+            'services' => $servicesRepository->findAll(),
+        ]);
+    }
 
     #[Route('/new', name: 'app_services_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response

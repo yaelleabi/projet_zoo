@@ -6,15 +6,15 @@
 
 {% block body %}
 
- {% include 'navbar.html.twig' %} 
+ {% include 'navbar.html.twig' %}
 
 
 <style>
 
 
 </style>
-<h1 class="justify-content-center" style="color: lightblue"> Le zoo Arcadia</h1>
-<h2> Le paradis des animaux </h2>
+<h1 class="text-center" > Le zoo Arcadia</h1>
+<h2 class="text-center" > Le paradis des animaux </h2>
 <div class = "container">
   <div class ="row ">
     <div class ="col md-3 ">
@@ -25,36 +25,60 @@
              <p class="card-text">Bonjour à tous!<br>
               Dans notre zoo vous trouverez les services suivants:<br>
              {% for service in services %}
-                    <h5 class=" text-sub" style="font-size: 0,8rem;">{{ service.nom}}</h5>
+                    <h5  style="font-size: 0,8rem;">{{ service.nom}}</h5>
               {% endfor %}
-              <a href="{{url('app_services_index')}}" class="btn btn-success">En savoir plus!</a>
+              <a href="{{url('app_services_customer')}}" class="btn btn-success">En savoir plus!</a>
 
-                   
-                </div>
+              </div>
+            </div>
+        </div>
+         <div class ="col md-3 ">
+      <div class="card " style="width:18rem;">
+        <img src="{{asset('images/train.jpeg')}}" class="card-img-top" alt="petit train">
+          <div class="card-body">
+            <h5 class="card-title">Nos habitats</h5>
+             <p class="card-text">Bonjour à tous!<br>
+              Dans notre zoo vous trouverez les habitats suivants:<br>
+             {% for habitat in habitats %}
+                    <h5  style="font-size: 0,8rem;">{{ habitat.nom}}</h5>
+              {% endfor %}
+              <a href="{{url('app_habitat_customer')}}" class="btn btn-success">Montrez les moi!</a>
+
+              </div>
             </div>
         </div>
       
-    <div class ="col md-6 ">
+    <div class ="col md-3 ">
       <div class="card" style="width: 18rem;">
         <img src="{{asset('images/zebre.jpg')}}" class="card-img-top" alt="petit train">
          <div class="card-body">
-          <h5 class="card-title">Nos services</h5>
+          <h5 class="card-title">Nos animaux</h5>
             <p class="card-text">Bonjour à tous!<br>
              Dans notre zoo vous trouverez les animaux suivants:<br>
-             <ul>
-              <li> Nos félins :Lions , tigres ,puma</li>
-              <li>Nos oiseaux exotiques</li>
-              <li><strong>Et tellement d'autres </strong></li>
-             </ul>
+             {% for animal in animals %}
+                    <h5  style="font-size: 0,8rem;">  {{ animal.name }} - {{ animal.race }}</h5>
+              {% endfor %}
+              <strong>Et tellement d'autres!! </strong>
             </p>
             <a href="https://g.co/kgs/UwVkz7c" class="btn btn-success">Comment venir?</a>
        </div>
     </div>
   
 </div>
-
-</div>
- {# {% include 'footer.html.twig' %}   #}
-
+<div class="row">
+ <div class="card">
+         <div class="card-body">
+          <h4 class="card-title ">Les avis laissés par nos visiteurs</h4>
+            <p class="card-text">
+             {% for review in reviews %}
+                    <h5  style="font-size: 0,8rem;">  {{ review.name }} : {{ review.content }}</h5>
+              {% endfor %}
+            </p>
+            <a href="{{url('app_submit_review')}}" class="btn btn-success">Laisser un avis</a>
+       </div>
+  </div>
+</div> 
+ 
+{% include 'footer.html.twig' %}   
 {% endblock %}
 

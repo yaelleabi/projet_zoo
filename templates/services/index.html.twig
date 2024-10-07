@@ -3,35 +3,37 @@
 {% block title %}Services index{% endblock %}
 
 {% block body %}
-    <h1>Nos Services</h1>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Nos Services</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for service in services %}
-            <tr>
-                <td>{{ service.id }}</td>
-                <td>{{ service.nom }}</td>
-                <td>{{ service.description }}</td>
-                <td>
-                    <a href="{{ path('app_services_show', {'id': service.id}) }}">show</a>
-                    <a href="{{ path('app_services_edit', {'id': service.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for service in services %}
+                <tr>
+                    <td>{{ service.nom }}</td>
+                    <td>{{ service.description }}</td>
+                    <td>
+                        <a href="{{ path('app_services_show', {'id': service.id}) }}" class="btn btn-info btn-sm">Voir</a>
+                        <a href="{{ path('app_services_edit', {'id': service.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3" class="text-center">Aucun service trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_services_new') }}">Create new</a>
+        <div class="text-center mt-4">
+            <a href="{{ path('app_services_new') }}" class="btn btn-success">Créer un nouveau service</a>
+        </div>
+    </div>
 {% endblock %}

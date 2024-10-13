@@ -21,6 +21,21 @@
             </tr>
         </tbody>
     </table>
+    <table>
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Consultations</th>
+        </tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+           <td>{{ animal.name}}</td>
+           <td>{{ consultations }}</td>
+        </tr>
+    </tbody>
+</table>
 
     <a href="{{ path('app_animal_index') }}">back to list</a>
 

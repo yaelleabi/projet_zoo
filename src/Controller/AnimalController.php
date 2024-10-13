@@ -10,6 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Document\AnimalsCount;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use App\Repository\AnimalsCountRepository;
 
 #[Route('/animal')]
 class AnimalController extends AbstractController
@@ -41,14 +45,41 @@ class AnimalController extends AbstractController
             'form' => $form,
         ]);
     }
+#[Route('/{id}', name: 'app_animal_show', methods: ['GET'])]
+public function show(int $id, AnimalRepository $animalRepository, AnimalsCountRepository $animalsCountRepository, DocumentManager $dm): Response
+{
+    // Chercher l'animal dans la base de données SQL
+    $animal = $animalRepository->findOneBy(['id' => $id]);
 
-    #[Route('/{id}', name: 'app_animal_show', methods: ['GET'])]
-    public function show(Animal $animal): Response
-    {
-        return $this->render('animal/show.html.twig', [
-            'animal' => $animal,
-        ]);
+    if (!$animal) {
+        // Si l'animal n'est pas trouvé, on renvoie une réponse JSON d'erreur
+        return new JsonResponse(['error' => 'Animal not found in SQL'], 404);
     }
+
+    // Ensuite, utiliser l'animalId pour chercher dans MongoDB
+    $animalsCount = $animalsCountRepository->findOneByAnimalId($id);
+
+    if (!$animalsCount) {
+        // Si l'animal n'est pas trouvé dans MongoDB, on crée un nouveau document
+        $animalsCount = new AnimalsCount();
+        $animalsCount->setAnimalId($id);
+        $animalsCount->setConsultationCount(1); 
+        $dm->persist($animalsCount);  
+    } else {
+        // Si le document existe déjà, on incrémente le compteur
+        $animalsCount->incrementConsultationCount();
+    }
+
+    // Sauvegarder les changements dans MongoDB
+    $dm->flush();  // Cette ligne est cruciale pour persister dans MongoDB
+
+    // Rendre la vue Twig avec les données de l'animal et le nombre de consultations
+    return $this->render('animal/show.html.twig', [
+        'animal' => $animal,
+        'consultations' => $animalsCount->getConsultationCount(),
+    ]);
+}
+
 
     #[Route('/{id}/edit', name: 'app_animal_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Animal $animal, EntityManagerInterface $entityManager): Response
@@ -78,4 +109,5 @@ class AnimalController extends AbstractController
 
         return $this->redirectToRoute('app_animal_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }

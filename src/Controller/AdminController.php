@@ -11,64 +11,68 @@ use App\Repository\OpeningHoursRepository;
 use App\Repository\AnimalsCountRepository;
 use App\Repository\AnimalRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ODM\MongoDB\DocumentManager;
+
 class AdminController extends AbstractController
 {
-    #[Route('/admin', name: 'app_admin')]
+    #[Route('/admin', name: 'app_admin', methods: ['GET'])]
     public function index(
+        Request $request,
         ServicesRepository $serviceRepository,
         HabitatRepository $habitatRepository,
         OpeningHoursRepository $openingHoursRepository,
         AnimalsCountRepository $animalsCountRepository,
-        AnimalRepository $animalsRepository,
-       
+        AnimalRepository $animalRepository,
+        DocumentManager $dm
     ): Response {
         $services = $serviceRepository->findAll();
-        $habitats= $habitatRepository->findAll();
-        $openingHours=$openingHoursRepository->findAll();
-        $animalsCount=$animalsCountRepository->findAll();
-        $animals=$animalsRepository->findAll();
-        
-        
+        $habitats = $habitatRepository->findAll();
+        $openingHours = $openingHoursRepository->findAll();
+        $animalsCount = $animalsCountRepository->findAll();
+        $animals = $animalRepository->findAll();
 
+        // Vérifier si un paramètre 'animalId' est présent dans la requête pour incrémenter le compteur
+        $animalId = $request->query->get('animalId');
+        if ($animalId) {
+            // Chercher l'animal dans la base SQL
+            $animal = $animalRepository->find($animalId);
 
-        
+            if (!$animal) {
+                return new JsonResponse(['error' => 'Animal not found in SQL'], 404);
+            }
 
+            // Chercher le document AnimalsCount correspondant dans MongoDB
+            $animalCount = $animalsCountRepository->findOneBy(['animalId' => $animalId]);
+
+            if (!$animalCount) {
+                // Si le document n'existe pas encore, le créer
+                $animalCount = new \App\Document\AnimalsCount();
+                $animalCount->setAnimalId($animalId);
+                $animalCount->setConsultationCount(1);
+                $dm->persist($animalCount);
+            } else {
+                // Si le document existe, on incrémente le compteur
+                $animalCount->incrementConsultationCount();
+            }
+
+            // Sauvegarder les modifications dans MongoDB
+            $dm->flush();
+
+            // Retourner les données de consultation en JSON pour la requête AJAX ou autre
+            return new JsonResponse([
+                'animalName' => $animal->getName(),
+                'consultations' => $animalCount->getConsultationCount(),
+            ]);
+        }
+
+        // Si aucun 'animalId' n'est fourni, on affiche la page d'administration
         return $this->render('admin/index.html.twig', [
             'services' => $services,
             'habitats' => $habitats,
-            'openingHours'=>$openingHours,
-            'animalsCount'=>$animalsCount,
-            'animals'=>$animals,
-            
+            'openingHours' => $openingHours,
+            'animalsCount' => $animalsCount,
+            'animals' => $animals,
         ]);
     }
-    public function consultAnimal(int $animalId, AnimalRepository $animalRepository, AnimalsCountRepository $animalsCountRepository, DocumentManager $dm): JsonResponse
-    {
-    // Cherche l'animal dans la base SQL
-    $animal = $animalRepository->findOneByAnimalId($animalId);
-
-    if (!$animal) {
-        return new JsonResponse(['error' => 'Animal not found in SQL'], 404);
-    }
-
-    // Ensuite, utilise l'animalId pour chercher dans MongoDB
-    $animalsCount = $animalsCountRepository->findOneByAnimalId($animalId);
-
-    if (!$animalsCount) {
-        return new JsonResponse(['error' => 'AnimalsCount not found in MongoDB'], 404);
-    }
-
-    // Incrémenter le compteur de consultations
-    $animalsCount->incrementConsultationCount();
-    $dm->persist($animalsCount);  // Persister les changements dans MongoDB
-    $dm->flush();
-
-    return new JsonResponse([
-        'animalName' => $animal->getName(), // Depuis la base SQL
-        'consultations' => $animalsCount->getConsultationCount() // Depuis MongoDB
-    ]);
-}
-
-
 }

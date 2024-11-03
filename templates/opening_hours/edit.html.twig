@@ -1,13 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit OpeningHours{% endblock %}
+{% block title %}Modifier les horaires d'ouverture{% endblock %}
 
 {% block body %}
-    <h1>Edit OpeningHours</h1>
+    <div class="container mt-5">
+        <h1 class="mb-4">Modifier les horaires d'ouverture</h1>
 
-    {{ include('opening_hours/_form.html.twig', {'button_label': 'Update'}) }}
+        <div class="mb-3">
+            {{ include('opening_hours/_form.html.twig', {'button_label': 'Modifier'}) }}
+        </div>
 
-    <a href="{{ path('app_opening_hours_index') }}">back to list</a>
+        <a href="{{ path('app_opening_hours_index') }}" class="btn btn-secondary">
+            Retourner à la liste
+        </a>
 
-    {# {{ include('opening_hours/_delete_form.html.twig') }} #}
+
+        {# 
+        {{ include('opening_hours/_delete_form.html.twig', { 'attr': {'class': 'd-inline'} }) }} 
+        <button class="btn btn-danger">Supprimer</button>
+        #}
+    </div>
 {% endblock %}

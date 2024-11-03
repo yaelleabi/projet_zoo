@@ -13,13 +13,26 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\CallbackTransformer;
-
+use Symfony\Component\Validator\Constraints\Email;
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('username')
+        ->add('username', null, [
+            'attr' => [
+                'class' => 'form-control', 
+                'placeholder' => 'Entrez votre adresse email'
+            ],
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Veuillez entrer une adresse email.',
+                ]),
+                new Email([
+                    'message' => 'L\'adresse email {{ value }} n\'est pas une adresse valide.',
+                ]),
+            ],
+        ])
             
             // ->add('agreeTerms', CheckboxType::class, [
             //     'mapped' => false,
@@ -38,15 +51,15 @@ class RegistrationFormType extends AbstractType
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'votre mot de passe doit contenir au moins {{ limit }} caractères',
                         'max' => 4096,
                     ]),
                 ],
             ])
             ->add('roles', ChoiceType::class, [
                 'choices' => [
-                    'Employee' => 'ROLE_EMPLOYEE',
-                    'Veterinary' => 'ROLE_VETERINARY',
+                    'Employé' => 'ROLE_EMPLOYEE',
+                    'Veterinaire' => 'ROLE_VETERINARY',
                 ],
                 'expanded' => true, // Afficher sous forme de cases à cocher
                 'multiple' => false, // Une seule option sélectionnable

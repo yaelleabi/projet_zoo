@@ -37,7 +37,7 @@ class RapportVeterinaire
         return $this->state;
     }
 
-    public function set(string $state): static
+    public function setState(string $state): static
     {
         $this->state = $state;
 

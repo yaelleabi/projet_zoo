@@ -1,30 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}OpeningHours index{% endblock %}
+{% block title %}OpeningHours{% endblock %}
 
 {% block body %}
-    <h1>OpeningHours index</h1>
+    <h1>Heures d'ouverture</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Day</th>
-                <th>OpenHour</th>
-                <th>CloseHour</th>
+                <th>jour</th>
+                <th>ouverture</th>
+                <th>fermeture</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for opening_hour in opening_hours %}
             <tr>
-                <td>{{ opening_hour.id }}</td>
                 <td>{{ opening_hour.day }}</td>
                 <td>{{ opening_hour.openHour ? opening_hour.openHour|date('H:i') : '' }}</td>
                 <td>{{ opening_hour.closeHour ? opening_hour.closeHour|date('H:i') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_opening_hours_show', {'id': opening_hour.id}) }}">show</a>
-                    <a href="{{ path('app_opening_hours_edit', {'id': opening_hour.id}) }}">edit</a>
+                    {# <a href="{{ path('app_opening_hours_show', {'id': opening_hour.id}) }}">show</a> #}
+                    <a href="{{ path('app_opening_hours_edit', {'id': opening_hour.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +33,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_opening_hours_new') }}">Create new</a>
+    <a href="{{ path('app_opening_hours_new') }}">Ajouter un nouvel horaire</a>
 {% endblock %}

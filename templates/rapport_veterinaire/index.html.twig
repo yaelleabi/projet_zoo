@@ -19,7 +19,7 @@
         {% for rapport_veterinaire in rapport_veterinaires %}
             <tr>
                 <td>{{ rapport_veterinaire.id }}</td>
-                <td>{{ rapport_veterinaire.état }}</td>
+                <td>{{ rapport_veterinaire.state }}</td>
                 <td>{{ rapport_veterinaire.date ? rapport_veterinaire.date|date('Y-m-d') : '' }}</td>
                 <td>{{ rapport_veterinaire.detail }}</td>
                 <td>

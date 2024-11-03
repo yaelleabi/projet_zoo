@@ -2,10 +2,23 @@
 
 {% block title %}New Services{% endblock %}
 
+
 {% block body %}
-    <h1>Create new Services</h1>
+    <div class="container mt-5">
+        <h1 class="mb-4">Créer un service</h1>
 
-    {{ include('services/_form.html.twig') }}
+        <div class="mb-3">
+            {{ include('services/_form.html.twig') }}
+        </div>
 
-    <a href="{{ path('app_services_index') }}">back to list</a>
+        <a href="{{ path('app_services_index') }}" class="btn btn-secondary">
+            Retourner à la liste
+        </a>
+
+
+        {# 
+        {{ include('opening_hours/_delete_form.html.twig', { 'attr': {'class': 'd-inline'} }) }} 
+        <button class="btn btn-danger">Supprimer</button>
+        #}
+    </div>
 {% endblock %}

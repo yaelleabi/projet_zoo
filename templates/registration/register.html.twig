@@ -3,14 +3,15 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1 class="justify-content-center" style="color: lightblue"> Création de compte employé/vetérinaire</h1>
-
+ <div class="container mt-5">
+    <h1 class="mb-4"> Création de compte employé/vetérinaire</h1>
+    <div class="mb-3">
     {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.username) }}
         {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
+            label: 'mot de passe'
         }) }}
          {{ form_row(registrationForm.roles) }}
 
@@ -18,6 +19,7 @@
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
+    </div>
     {# Affiche tous les messages flash de type 'success' #}
 {% for message in app.flashes('success') %}
     <div class="alert alert-success">
@@ -25,5 +27,6 @@
     </div>
 {% endfor %}
 
+</div>
 
 {% endblock %}

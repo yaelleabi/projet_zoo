@@ -8,7 +8,34 @@
 
         <div class="row">
             <div class="col-md-4">
-                <h3>Voici la liste de la nourrityre donnée par les employés</h3>
+                <h3>Voici la liste de la nourriture donnée par les employés</h3>
+                    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>FoodType</th>
+                <th>Quantity</th>
+                <th>Animal</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for animalFeeding in animalFeedings %}
+            <tr>
+               
+                <td>{{ animalFeeding.Date ? animalFeeding.Date|date('Y-m-d H:i') : '' }}</td>
+                <td>{{ animalFeeding.foodType }}</td>
+                <td>{{ animalFeeding.quantity }}</td>
+                <td>{{ animalFeeding.animal.name }}</td>
+            
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
                  
             </div>
             <div class="col-md-8">

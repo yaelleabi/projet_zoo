@@ -21,7 +21,7 @@ class AnimalFeedingType extends AbstractType
             ->add('quantity')
             ->add('animal', EntityType::class, [
                 'class' => Animal::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
             ])
         ;
     }

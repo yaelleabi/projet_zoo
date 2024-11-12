@@ -12,6 +12,7 @@
                 <th>Date</th>
                 <th>FoodType</th>
                 <th>Quantity</th>
+                <th>animal</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,6 +23,8 @@
                 <td>{{ animal_feeding.Date ? animal_feeding.Date|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ animal_feeding.foodType }}</td>
                 <td>{{ animal_feeding.quantity }}</td>
+                <td>
+                {{ animal_feeding.animal.name}}
                 <td>
                     <a href="{{ path('app_animal_feeding_show', {'id': animal_feeding.id}) }}">show</a>
                     <a href="{{ path('app_animal_feeding_edit', {'id': animal_feeding.id}) }}">edit</a>

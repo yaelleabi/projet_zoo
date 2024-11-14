@@ -1,36 +1,43 @@
- {% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block title %}formulaire de contact{% endblock %}
+{% block title %}Formulaire de contact{% endblock %}
 
 {% block body %}
 {% include 'navbar.html.twig' %}
-{# {% include 'footer.html.twig' %} #}
 
-<style>
-
-  
-</style>
 <div class="container mt-5">
-    <h1>Formulaire de contact</h1>
+    <h1 class="text-center mb-4">Formulaire de contact</h1>
 
-    {{ form_start(form, {'attr': {'class': 'row g-3'}}) }} 
+    <h4> 
+        Le Zoo Arcadia se tient à disposition pour répondre à toutes vos questions. 
+        Contactez-nous à l'aide du formulaire ci-dessous et une réponse vous sera envoyée 
+        dans un délai de 3 jours ouvrés.
+    </h4>
+    <br>
 
-        <div class="col-md-6">
-            {{ form_row(form.title, {'attr': {'class': 'form-control'}}) }}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            {{ form_start(form, {'attr': {'class': 'row g-3'}}) }}
+
+                <div class="col-md-6">
+                    {{ form_row(form.title, {'label': 'Sujet', 'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="col-md-6">
+                    {{ form_row(form.description, {'label': 'Description', 'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="col-md-12">
+                    {{ form_row(form.mail, {'label': 'Adresse email', 'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">Envoyer</button>
+                </div>
+
+            {{ form_end(form) }}
         </div>
-
-        <div class="col-md-6">
-            {{ form_row(form.description, {'attr': {'class': 'form-control'}}) }}
-        </div>
-
-        <div class="col-md-12">
-            {{ form_row(form.mail, {'attr': {'class': 'form-control'}}) }}
-        </div>
-
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary">Envoyer</button>
-        </div>
-
-    {{ form_end(form) }}     
+    </div>
 </div>
-{% endblock %} 
+
+{% endblock %}

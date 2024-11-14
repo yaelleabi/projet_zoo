@@ -20,8 +20,14 @@
                     <td>{{ service.nom }}</td>
                     <td>{{ service.description }}</td>
                     <td>
-                        {# <a href="{{ path('app_services_show', {'id': service.id}) }}" class="btn btn-info btn-sm">Voir</a> #}
+                        {# Lien vers l'édition #}
                         <a href="{{ path('app_services_edit', {'id': service.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+
+                        {# Formulaire de suppression intégré dans la boucle #}
+                        <form method="post" action="{{ path('app_services_delete', {'id': service.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce service ?');" class="d-inline">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ service.id) }}">
+                            <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                        </form>
                     </td>
                 </tr>
             {% else %}

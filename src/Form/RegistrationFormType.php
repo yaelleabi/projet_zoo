@@ -22,7 +22,8 @@ class RegistrationFormType extends AbstractType
         ->add('username', null, [
             'attr' => [
                 'class' => 'form-control', 
-                'placeholder' => 'Entrez votre adresse email'
+                'placeholder' => 'Entrez votre adresse email',
+                
             ],
             'constraints' => [
                 new NotBlank([
@@ -32,6 +33,7 @@ class RegistrationFormType extends AbstractType
                     'message' => 'L\'adresse email {{ value }} n\'est pas une adresse valide.',
                 ]),
             ],
+            'label' => 'Adresse mail'
         ])
             
             // ->add('agreeTerms', CheckboxType::class, [
@@ -54,7 +56,9 @@ class RegistrationFormType extends AbstractType
                         'minMessage' => 'votre mot de passe doit contenir au moins {{ limit }} caractères',
                         'max' => 4096,
                     ]),
+                    
                 ],
+                'label' => 'mot de passe'
             ])
             ->add('roles', ChoiceType::class, [
                 'choices' => [
@@ -63,6 +67,7 @@ class RegistrationFormType extends AbstractType
                 ],
                 'expanded' => true, // Afficher sous forme de cases à cocher
                 'multiple' => false, // Une seule option sélectionnable
+                
             ]);
 
         // Transformer les données entre la vue et le modèle

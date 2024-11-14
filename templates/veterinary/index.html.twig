@@ -1,47 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello VeterinaryController!{% endblock %}
+{% block title %}Espace Vétérinaire{% endblock %}
 
 {% block body %}
-  <div class="container mt-4">
-        <h1 class="mb-4">Bonjour, bienvenue dans votre espace Vétérinaire</h1>
+<div class="container mt-4">
+    <h1 class="mb-4 text-center">Bonjour, bienvenue dans votre espace Vétérinaire</h1>
 
-        <div class="row">
-            <div class="col-md-4">
-                <h3>Voici la liste de la nourriture donnée par les employés</h3>
-                    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>FoodType</th>
-                <th>Quantity</th>
-                <th>Animal</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for animalFeeding in animalFeedings %}
-            <tr>
-               
-                <td>{{ animalFeeding.Date ? animalFeeding.Date|date('Y-m-d H:i') : '' }}</td>
-                <td>{{ animalFeeding.foodType }}</td>
-                <td>{{ animalFeeding.quantity }}</td>
-                <td>{{ animalFeeding.animal.name }}</td>
-            
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-                 
-            </div>
-            <div class="col-md-8">
-               <h3>Entrer un nouveau rapport Vétérinaire</h3>
-                <a class="btn btn-primary text-white" href="{{url('app_rapport_veterinaire_new') }}">Ajouter un nouveau rapport</a>
-    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="h5">Liste de la nourriture donnée par les employés</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Date</th>
+                                <th>Type de nourriture</th>
+                                <th>Quantité</th>
+                                <th>Animal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for animalFeeding in animalFeedings %}
+                                <tr>
+                                    <td>{{ animalFeeding.Date ? animalFeeding.Date|date('d-m-Y') : '' }}</td>
+                                    <td>{{ animalFeeding.foodType }}</td>
+                                    <td>{{ animalFeeding.quantity }}</td>
+                                    <td>{{ animalFeeding.animal.name }}</td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="4" class="text-center text-muted">Aucune donnée disponible</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-success text-white">
+                    <h3 class="h5">Entrer un nouveau rapport Vétérinaire</h3>
+                </div>
+                <div class="card-body text-center">
+                    <p>Ajoutez des informations sur la santé des animaux en créant un nouveau rapport.</p>
+                    <a class="btn btn-primary mb-2" href="{{ path('app_rapport_veterinaire_new') }}">
+                        Ajouter un nouveau rapport
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-3">
+        <a class="btn btn-danger" href="{{ path('app_logout') }}">
+            Déconnexion
+        </a>
+    </div>
+</div>
 {% endblock %}

@@ -14,10 +14,6 @@ class EmployeController extends AbstractController
     #[Route('/employe', name: 'app_employe')]
     public function index(EntityManagerInterface $entityManager): Response
     {
-        // return $this->render('employe/index.html.twig', [
-        //     'controller_name' => 'EmployeController',
-            
-        // ]);
         $pendingReviews = $entityManager->getRepository(Review::class)->findBy(['status' => 'pending']);
 
         return $this->render('employe/index.html.twig', [

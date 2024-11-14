@@ -3,11 +3,23 @@
 {% block title %}Edit Habitat{% endblock %}
 
 {% block body %}
-    <h1>Edit Habitat</h1>
+    
+    
+    <div class="container mt-5">
+        <h1 class="mb-4">Modifier les habitats</h1>
 
-    {{ include('habitat/_form.html.twig', {'button_label': 'Update'}) }}
+        <div class="mb-3">
+            {{ include('habitat/_form.html.twig', {'button_label': 'Modifier'}) }}
+        </div>
 
-    <a href="{{ path('app_habitat_index') }}">back to list</a>
+        <a href="{{ path('app_habitat_index') }}" class="btn btn-secondary">
+            Retourner à la liste
+        </a>
 
-    {{ include('habitat/_delete_form.html.twig') }}
+
+        {# 
+        {{ include('opening_hours/_delete_form.html.twig', { 'attr': {'class': 'd-inline'} }) }} 
+        <button class="btn btn-danger">Supprimer</button>
+        #}
+    </div>
 {% endblock %}

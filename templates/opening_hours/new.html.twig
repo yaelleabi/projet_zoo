@@ -3,9 +3,15 @@
 {% block title %}New OpeningHours{% endblock %}
 
 {% block body %}
-    <h1>Create new OpeningHours</h1>
+    <div class="container mt-5">
+        <h1 class="mb-4">Ajouter un horaire</h1>
 
-    {{ include('opening_hours/_form.html.twig') }}
+        <div class="mb-3">
+            {{ include('opening_hours/_form.html.twig') }}
+        </div>
 
-    <a href="{{ path('app_opening_hours_index') }}">back to list</a>
+        <a href="{{ path('app_opening_hours_index') }}" class="btn btn-secondary">
+            Retourner à la liste
+        </a>
+
 {% endblock %}

@@ -3,9 +3,14 @@
 {% block title %}New AnimalFeeding{% endblock %}
 
 {% block body %}
-    <h1>Create new AnimalFeeding</h1>
+    <div class="container mt-5">
+        <h1 class="mb-4">Ajouter de la nourriture à un animal</h1>
 
-    {{ include('animal_feeding/_form.html.twig') }}
+        <div class="mb-3">
+            {{ include('animal_feeding/_form.html.twig') }}
+        </div>
 
-    <a href="{{ path('app_animal_feeding_index') }}">back to list</a>
+        {# <a href="{{ path('app_animal_index') }}" class="btn btn-secondary">
+            Retourner à la liste
+        </a> #}
 {% endblock %}

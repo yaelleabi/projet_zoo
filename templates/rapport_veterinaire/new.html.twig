@@ -3,9 +3,10 @@
 {% block title %}New RapportVeterinaire{% endblock %}
 
 {% block body %}
-    <h1>Create new RapportVeterinaire</h1>
+    <div class="container mt-5">
+        <h1 class="mb-4">Ajouter nouveau Rapport veterinaire</h1>
 
-    {{ include('rapport_veterinaire/_form.html.twig') }}
-
-    <a href="{{ path('app_rapport_veterinaire_index') }}">back to list</a>
+        <div class="mb-3">
+            {{ include('rapport_veterinaire/_form.html.twig') }}
+        </div>
 {% endblock %}

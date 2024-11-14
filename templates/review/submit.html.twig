@@ -1,11 +1,32 @@
-
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Déposer un avis</h1>
+{% block title %}Déposez votre avis{% endblock %}
 
-    {{ form_start(reviewForm) }}
-        {{ form_widget(reviewForm) }}
-        <button class="btn btn-primary">Soumettre</button>
-    {{ form_end(reviewForm) }}
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Ajouter un avis sur le Zoo Arcadia</h1>
+    <h4 class="text-muted mb-4">
+        Votre expérience au Zoo Arcadia vous a plu ? Partagez vos impressions avec nous en déposant un avis ci-dessous. Nous apprécions vos retours pour améliorer votre visite !
+    </h4>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            {{ form_start(reviewForm, {'attr': {'class': 'row g-3'}}) }}
+
+            <div class="col-md-12">
+                {{ form_widget(reviewForm, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="col-12 text-center mt-3">
+                <button class="btn btn-primary btn-lg">Soumettre</button>
+            </div>
+
+            {{ form_end(reviewForm) }}
+            
+        </div>
+    </div>
+    <div class="text-center mt-4">
+                <a href="{{ path('home') }}" class="btn btn-secondary">Retour à l'accueil</a>
+            </div>
+</div>
 {% endblock %}

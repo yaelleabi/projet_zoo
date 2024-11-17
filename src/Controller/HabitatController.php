@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Habitat;
 use App\Form\HabitatType;
 use App\Repository\HabitatRepository;
+use App\Repository\OpeningHoursRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,10 +23,11 @@ class HabitatController extends AbstractController
         ]);
     }
     #[Route('/customer', name: 'app_habitat_customer', methods: ['GET'])]
-    public function custom(HabitatRepository $habitatRepository): Response
+    public function custom(HabitatRepository $habitatRepository, OpeningHoursRepository $openingHoursRepository,): Response
     {
         return $this->render('habitat/customer.html.twig', [
             'habitats' => $habitatRepository->findAll(),
+            'openingHours'=>$openingHoursRepository->findAll(),
         ]);
     }
 

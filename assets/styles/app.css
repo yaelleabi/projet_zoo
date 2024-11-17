@@ -6,7 +6,22 @@
     --light: #F2F2F2;
     --white: #FFFFFF;
 }
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .container {
+    flex: 1; /* Ensures this section takes up the available space */
+}
 
+footer {
+    margin-top: auto;
+    margin-left: auto; 
+    margin-right: auto;/* Pushes the footer to the bottom of the page */
+}
 a {
     color: var(--aux);
 }

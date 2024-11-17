@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Services;
 use App\Form\ServicesType;
+use App\Repository\OpeningHoursRepository;
 use App\Repository\ServicesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,10 +23,14 @@ class ServicesController extends AbstractController
         ]);
     }
     #[Route('/customer', name: 'app_services_customer', methods: ['GET'])]
-    public function custom(ServicesRepository $servicesRepository): Response
-    {
+    public function custom(ServicesRepository $servicesRepository,OpeningHoursRepository $openingHoursRepository,
+    ): Response
+    {        
+        
+
         return $this->render('services/customer.html.twig', [
             'services' => $servicesRepository->findAll(),
+            'openingHours'=>$openingHoursRepository->findAll(),
         ]);
     }
 

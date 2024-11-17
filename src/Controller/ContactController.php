@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\OpeningHoursRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +13,7 @@ use App\Form\ContactType;
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'contact')]
-    public function index(Request $request): Response
+    public function index(Request $request, OpeningHoursRepository $openingHoursRepository): Response
     {
         // Crée une nouvelle instance de l'entité Contact
         $contact = new Contact();
@@ -32,6 +33,7 @@ class ContactController extends AbstractController
         return $this->render('contact/index.html.twig', [
             'controller_name' => 'ContactController',
             'form' => $form->createView(), // Passe le formulaire à la vue
+            'openingHours'=>$openingHoursRepository->findAll(),
         ]);
     }
 }

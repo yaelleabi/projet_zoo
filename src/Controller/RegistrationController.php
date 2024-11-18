@@ -43,16 +43,9 @@ class RegistrationController extends AbstractController
              $email = (new Email())
             ->from('josearcadia1012@gmail.com') // Admin email
             ->to($user->getUsername()) // Employee email (make sure User entity has a getEmail() method)
-            ->subject('Welcome to Our Company!')
-            ->text('Dear employee, your registration has been completed by the admin. Welcome aboard!')
-            ->html('<p>Dear employee,</p><p>Your registration has been completed by the admin. Welcome aboard!</p>');
-
+            ->subject('Bienvenue au zoo arcadia!')
+            ->text('cher employé votre inscription a été effectuée!');
              $mailer->send($email);
-            
-            
-
-           // return $security->login($user, LoginAuthenticator::class, 'main');
-           // Dans ton contrôleur
             $this->addFlash('success', 'Votre inscription a été réussie !');
 
         }

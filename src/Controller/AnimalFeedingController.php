@@ -14,7 +14,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/animal/feeding')]
 class AnimalFeedingController extends AbstractController
-{   #[IsGranted('ROLE_EMPLOYEE'), IsGranted('ROLE_VETERINARY')]
+{   #[IsGranted('ROLE_EMPLOYEE')]
     #[Route('/a', name: 'app_animal_feeding_index', methods: ['GET'])]
     public function index(AnimalFeedingRepository $animalFeedingRepository): Response
     {
@@ -43,7 +43,7 @@ class AnimalFeedingController extends AbstractController
         ]);
     }
 
-    #[IsGranted('ROLE_EMPLOYEE'), IsGranted('ROLE_VETERINARY')]
+    #[IsGranted('ROLE_EMPLOYEE')]
     #[Route('/{id}', name: 'app_animal_feeding_show', methods: ['GET'])]
     public function show(AnimalFeeding $animalFeeding): Response
     {

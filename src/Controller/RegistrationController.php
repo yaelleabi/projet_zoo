@@ -37,7 +37,6 @@ class RegistrationController extends AbstractController
                 )
             );
             $user->setRoles($form->get('roles')->getData());
-            //$user->setRoles([$form->get('roles')->getData()]); // Enveloppe le rôle dans un tableau
 
 
             $entityManager->persist($user);
@@ -45,7 +44,7 @@ class RegistrationController extends AbstractController
         
              $email = (new Email())
             ->from('josearcadia1012@gmail.com') // Admin email
-            ->to($user->getUsername()) // Employee email (make sure User entity has a getEmail() method)
+            ->to($user->getUsername()) 
             ->subject('Bienvenue au zoo arcadia!')
             ->text('cher employé votre inscription a été effectuée!');
              $mailer->send($email);

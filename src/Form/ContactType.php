@@ -13,8 +13,32 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
-            ->add('description')
+        ->add('title', null, [
+            'attr' => [
+                'class' => 'form-control', 
+                
+                
+            ],
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Veuillez entrer un titre.',
+                ]),
+            ],
+            'label' => 'Titre'
+            ])
+            ->add('description', null, [
+                'attr' => [
+                    'class' => 'form-control', 
+                    
+                    
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez entrer une description.',
+                    ]),
+                ],
+                'label' => 'Titre'
+                ])
             ->add('mail', null, [
                 'attr' => [
                     'class' => 'form-control', 

@@ -10,10 +10,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/animal/feeding')]
 class AnimalFeedingController extends AbstractController
-{
+{   #[IsGranted('ROLE_EMPLOYEE'), IsGranted('ROLE_VETERINARY')]
     #[Route('/a', name: 'app_animal_feeding_index', methods: ['GET'])]
     public function index(AnimalFeedingRepository $animalFeedingRepository): Response
     {
@@ -21,7 +22,7 @@ class AnimalFeedingController extends AbstractController
             'animal_feedings' => $animalFeedingRepository->findAll(),
         ]);
     }
-
+    #[IsGranted('ROLE_EMPLOYEE')]
     #[Route('/new', name: 'app_animal_feeding_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -42,6 +43,7 @@ class AnimalFeedingController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_EMPLOYEE'), IsGranted('ROLE_VETERINARY')]
     #[Route('/{id}', name: 'app_animal_feeding_show', methods: ['GET'])]
     public function show(AnimalFeeding $animalFeeding): Response
     {
@@ -49,7 +51,7 @@ class AnimalFeedingController extends AbstractController
             'animal_feeding' => $animalFeeding,
         ]);
     }
-
+    #[IsGranted('ROLE_EMPLOYEE')]
     #[Route('/{id}/edit', name: 'app_animal_feeding_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, AnimalFeeding $animalFeeding, EntityManagerInterface $entityManager): Response
     {
@@ -68,6 +70,7 @@ class AnimalFeedingController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_EMPLOYEE')]
     #[Route('/{id}', name: 'app_animal_feeding_delete', methods: ['POST'])]
     public function delete(Request $request, AnimalFeeding $animalFeeding, EntityManagerInterface $entityManager): Response
     {

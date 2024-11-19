@@ -14,10 +14,12 @@ use App\Document\AnimalsCount;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use App\Repository\AnimalsCountRepository;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/animal')]
 class AnimalController extends AbstractController
-{
+{ 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/', name: 'app_animal_index', methods: ['GET'])]
     public function index(AnimalRepository $animalRepository): Response
     {
@@ -25,6 +27,7 @@ class AnimalController extends AbstractController
             'animals' => $animalRepository->findAll(),
         ]);
     }
+    #[IsGranted('ROLE_ADMIN')]
 
     #[Route('/new', name: 'app_animal_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -80,7 +83,7 @@ public function show(int $id, AnimalRepository $animalRepository, AnimalsCountRe
     ]);
 }
 
-
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}/edit', name: 'app_animal_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Animal $animal, EntityManagerInterface $entityManager): Response
     {
@@ -99,6 +102,7 @@ public function show(int $id, AnimalRepository $animalRepository, AnimalsCountRe
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_animal_delete', methods: ['POST'])]
     public function delete(Request $request, Animal $animal, EntityManagerInterface $entityManager): Response
     {

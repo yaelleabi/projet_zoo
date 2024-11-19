@@ -11,10 +11,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route(path: '/services')]
 class ServicesController extends AbstractController
-{
+{    
+    #[IsGranted('ROLE_EMPLOYEE'), IsGranted('ROLE_ADMIN')]
     #[Route('/', name: 'app_services_index', methods: ['GET'])]
     public function index(ServicesRepository $servicesRepository): Response
     {
@@ -33,6 +35,7 @@ class ServicesController extends AbstractController
             'openingHours'=>$openingHoursRepository->findAll(),
         ]);
     }
+    #[IsGranted('ROLE_EMPLOYEE'), IsGranted('ROLE_ADMIN')]
 
     #[Route('/new', name: 'app_services_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -53,7 +56,7 @@ class ServicesController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    #[IsGranted('ROLE_EMPLOYEE'), IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_services_show', methods: ['GET'])]
     public function show(Services $service): Response
     {
@@ -61,6 +64,7 @@ class ServicesController extends AbstractController
             'service' => $service,
         ]);
     }
+    #[IsGranted('ROLE_EMPLOYEE'), IsGranted('ROLE_ADMIN')]
 
     #[Route('/{id}/edit', name: 'app_services_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Services $service, EntityManagerInterface $entityManager): Response
@@ -79,6 +83,7 @@ class ServicesController extends AbstractController
             'form' => $form,
         ]);
     }
+    #[IsGranted('ROLE_EMPLOYEE'), IsGranted('ROLE_ADMIN')]
 
     #[Route('/{id}', name: 'app_services_delete', methods: ['POST'])]
     public function delete(Request $request, Services $service, EntityManagerInterface $entityManager): Response

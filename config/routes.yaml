@@ -18,4 +18,10 @@ app_employee:
 homepage:
     path: /
     controller: App\Controller\HomeController::index
+    
+contact_form:
+    path: /contact
+    controller: App\Controller\ContactController::contactForm
+    methods: POST
+
 

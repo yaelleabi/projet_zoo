@@ -10,10 +10,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+
+#[IsGranted('ROLE_ADMIN')]
 #[Route('/opening/hours')]
 class OpeningHoursController extends AbstractController
 {
+
     #[Route('/', name: 'app_opening_hours_index', methods: ['GET'])]
     public function index(OpeningHoursRepository $openingHoursRepository): Response
     {

@@ -8,9 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ReviewValidateController extends AbstractController
 {
+    #[IsGranted('ROLE_EMPLOYEE')]
     #[Route('/submit-review', name: 'app_submit_review')]
     public function submitReview(Request $request, EntityManagerInterface $entityManager): Response
     {

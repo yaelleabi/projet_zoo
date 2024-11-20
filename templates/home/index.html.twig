@@ -71,7 +71,7 @@
           <h4 class="card-title ">Les avis laissés par nos visiteurs</h4>
             <p class="card-text">
              {% for review in reviews %}
-                    <h5  style="font-size: 0,8rem; color:lightblue;">  {{ review.name }} : {{ review.content }}</h5>
+                    <h5  style="font-size: 0,8rem; color:lightblue;">  <strong>{{ review.name }}  </strong> : {{ review.content }}</h5>
               {% endfor %}
             </p>
             <a href="{{url('app_submit_review')}}" class="btn btn-success">Laisser un avis</a>

@@ -26,27 +26,44 @@ class ContactController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($contact);
-            $entityManager->flush();
+        if ($form->isSubmitted()) {
+            // Vérifier si le formulaire est valide
+            if ($form->isValid()) {
+                $entityManager->persist($contact);
+                $entityManager->flush();
 
-            return new JsonResponse([
-                'success' => true,
-                'message' => 'Votre message a été envoyé avec succès !',
-                'data' => [
-                    'title' => $contact->getTitle(),
-                    'description' => $contact->getDescription(),
-                    'mail' => $contact->getMail(),
-                ],
-            ]);
+                return new JsonResponse([
+                    'success' => true,
+                    'message' => 'Votre message a été envoyé avec succès !',
+                    'data' => [
+                        'title' => $contact->getTitle(),
+                        'description' => $contact->getDescription(),
+                        'mail' => $contact->getMail(),
+                    ],
+                ]);
+            } else {
+                // Si le formulaire n'est pas valide, retourner les erreurs
+                $errors = [];
+                foreach ($form->getErrors(true) as $error) {
+                    $errors[] = $error->getMessage();
+                }
+
+                return new JsonResponse([
+                    'success' => false,
+                    'message' => 'Des erreurs ont été détectées dans le formulaire.',
+                    'errors' => $errors,
+                ]);
+            }
         }
 
         $openingHours = $openingHoursRepository->findAll();
+
 
         return $this->render('contact/index.html.twig', [
             'controller_name' => 'ContactController',
             'form' => $form->createView(),
             'openingHours' => $openingHours,
+            
         ]);
     }
 }

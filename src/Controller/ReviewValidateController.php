@@ -8,11 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
-
 class ReviewValidateController extends AbstractController
 {
-    #[IsGranted('ROLE_EMPLOYEE')]
+    
     #[Route('/submit-review', name: 'app_submit_review')]
     public function submitReview(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -33,12 +31,17 @@ class ReviewValidateController extends AbstractController
             $this->addFlash('success', 'Votre avis a été soumis et est en attente de validation.');
 
             // Rediriger ou afficher la confirmation
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('app_submit_review');
         }
+        $approvedReviews = $entityManager->getRepository(Review::class)->findBy(['status' => 'approved']);
+
 
         // Afficher le formulaire d'avis
         return $this->render('review/submit.html.twig', [
             'reviewForm' => $form->createView(),
+            'approvedReviews' => $approvedReviews,
+
         ]);
+
     }
 }

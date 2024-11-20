@@ -10,6 +10,7 @@ use App\Repository\ServicesRepository;
 use App\Repository\HabitatRepository;
 use App\Repository\AnimalRepository;
 use App\Repository\ReviewRepository;
+
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home')]
@@ -21,20 +22,19 @@ class HomeController extends AbstractController
         ReviewRepository $reviewRepository,    
     ): Response {
         $services = $serviceRepository->findAll();
-        $habitats= $habitatRepository->findAll();
-        $openingHours= $openingHoursRepository->findAll();
-        $animals=$animalRepository->findAll();
-        $reviews=$reviewRepository->findAll();
-
+        $habitats = $habitatRepository->findAll();
+        $openingHours = $openingHoursRepository->findAll();
+        $animals = $animalRepository->findAll();
         
+        // Utilisation du ReviewRepository pour récupérer les avis approuvés
+        $reviews = $reviewRepository->findBy(['status' => 'approved']);
 
         return $this->render('home/index.html.twig', [
             'services' => $services,
             'habitats' => $habitats,
-            'openingHours'=>$openingHours,
-            'animals'=>$animals,
-            'reviews'=>$reviews
-            
+            'openingHours' => $openingHours,
+            'animals' => $animals,
+            'reviews' => $reviews
         ]);
     }
 }
